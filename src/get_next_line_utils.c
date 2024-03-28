@@ -6,13 +6,13 @@
 /*   By: yboumlak <yboumlak@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 12:38:36 by yboumlak          #+#    #+#             */
-/*   Updated: 2024/03/28 02:43:13 by yboumlak         ###   ########.fr       */
+/*   Updated: 2024/03/28 19:48:02 by yboumlak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_g(char *s1, char *s2)
 {
 	char	*new_str;
 	size_t	total_len;
