@@ -6,7 +6,7 @@
 /*   By: yboumlak <yboumlak@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 02:26:51 by yboumlak          #+#    #+#             */
-/*   Updated: 2024/03/28 23:06:08 by yboumlak         ###   ########.fr       */
+/*   Updated: 2024/03/29 03:50:34 by yboumlak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_game
 {
 	int		height;
 	int		width;
-	t_map	map;
+	t_map	map_element;
 }			t_game;
 
 void		handle_game_error(int type);
