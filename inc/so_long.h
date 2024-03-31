@@ -6,7 +6,7 @@
 /*   By: yboumlak <yboumlak@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 02:26:51 by yboumlak          #+#    #+#             */
-/*   Updated: 2024/03/31 03:22:20 by yboumlak         ###   ########.fr       */
+/*   Updated: 2024/03/31 21:48:11 by yboumlak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../lib/Libft/libft.h"
 # include "get_next_line.h"
-# include <mlx.h>
+// # include <mlx.h>
 # include <stdbool.h>
 typedef struct s_map
 {
@@ -33,6 +33,8 @@ typedef struct s_player
 
 typedef struct s_game
 {
+	void		*mlx_ptr;
+	void		*win_ptr;
 	int			height;
 	int			width;
 	char		**map;
@@ -42,6 +44,9 @@ typedef struct s_game
 
 void			handle_game_error(int type);
 void			read_map(t_game *game, int fd);
-void			check_map_accessiblility(t_game *game);
+void			check_map_accessibility(t_game *game);
+void			init_elements(t_game *game);
+void			init_map(t_game *game, int fd);
+void			init_mlx(t_game *game);
 
 #endif

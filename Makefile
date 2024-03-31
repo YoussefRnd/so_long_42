@@ -4,7 +4,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -fr
 MKDIR = mkdir -p
-MLX = -lmlx -framework OpenGL -framework AppKit
+# MLX = -lmlx -framework OpenGL -framework AppKit
 
 LIBFT_DIR = lib/Libft
 LIBFT = -L$(LIBFT_DIR) -lft
@@ -27,7 +27,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(NAME): $(OBJS)
 	@make -s -C $(LIBFT_DIR)
 	@echo "Building $@..."
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I$(INC_DIR) $(LIBFT) $(MLX)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -I$(INC_DIR) $(LIBFT) 
 	@echo "$@ is ready!"
 
 clean:

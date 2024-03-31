@@ -6,7 +6,7 @@
 /*   By: yboumlak <yboumlak@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 03:01:46 by yboumlak          #+#    #+#             */
-/*   Updated: 2024/03/31 01:38:38 by yboumlak         ###   ########.fr       */
+/*   Updated: 2024/03/31 21:37:49 by yboumlak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,17 @@ void	check_map_line(t_game *game, char *line, int check_wall,
 	len = ft_strlen(line);
 	if (line[len - 1] == '\n')
 		len -= 1;
-	printf("%d\n", len);
 	if (len != game->width)
-		handle_game_error(5);
+		handle_game_error(4);
 	while (line[i] && line[i] != '\n')
 	{
-		if ((i == 0 || i == len - i) && line[i] != '1')
+		if ((i == 0 || i == len - 1) && line[i] != '1')
 			handle_game_error(1);
-		if (check_wall && line[i] != '1')
+		if ((check_wall || is_last_line) && line[i] != '1')
 			handle_game_error(1);
-		if (line[i] != '1' && line[i] != '0' && line[i] != 'P' && line[i] != 'C'
-			&& line[i] != 'E')
+		if (!check_wall && !is_last_line && line[i] != '1' && line[i] != '0'
+			&& line[i] != 'P' && line[i] != 'C' && line[i] != 'E')
 			handle_game_error(0);
-		if (is_last_line && line[i] != '1')
-			handle_game_error(1);
 		set_map_elements(game, line[i]);
 		i++;
 	}
@@ -63,11 +60,11 @@ void	check_map_line(t_game *game, char *line, int check_wall,
 void	check_map_elements(t_game *game)
 {
 	if (game->map_elements.player == 0)
-		handle_game_error(6);
+		handle_game_error(5);
 	if (game->map_elements.exit == 0)
-		handle_game_error(6);
-	if (game->map_elements.player == 0)
-		handle_game_error(6);
+		handle_game_error(5);
+	if (game->map_elements.collectible == 0)
+		handle_game_error(5);
 }
 
 void	read_map(t_game *game, int fd)
@@ -78,7 +75,6 @@ void	read_map(t_game *game, int fd)
 	char	*next_line;
 
 	height = 0;
-	game = (t_game *)malloc(sizeof(t_game));
 	line = get_next_line(fd);
 	while (line && *line)
 	{
