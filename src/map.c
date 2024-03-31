@@ -6,33 +6,33 @@
 /*   By: yboumlak <yboumlak@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 03:01:46 by yboumlak          #+#    #+#             */
-/*   Updated: 2024/03/29 03:57:37 by yboumlak         ###   ########.fr       */
+/*   Updated: 2024/03/31 01:38:38 by yboumlak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-void	set_map(t_game *game, char element)
+void	set_map_elements(t_game *game, char element)
 {
 	if (element == '1')
-		game->map_element.wall = 1;
+		game->map_elements.wall = 1;
 	else if (element == 'P')
 	{
-		if (game->map_element.player >= 1)
+		if (game->map_elements.player >= 1)
 			handle_game_error(2);
-		game->map_element.player = 1;
+		game->map_elements.player = 1;
 	}
 	else if (element == 'C')
-		game->map_element.collectible += 1;
+		game->map_elements.collectible += 1;
 	else if (element == 'E')
 	{
-		if (game->map_element.exit >= 1)
+		if (game->map_elements.exit >= 1)
 			handle_game_error(3);
-		game->map_element.exit = 1;
+		game->map_elements.exit = 1;
 	}
 }
-
-void	check_map(t_game *game, char *line, int check_wall)
+void	check_map_line(t_game *game, char *line, int check_wall,
+		int is_last_line)
 {
 	int	len;
 	int	i;
@@ -41,41 +41,60 @@ void	check_map(t_game *game, char *line, int check_wall)
 	len = ft_strlen(line);
 	if (line[len - 1] == '\n')
 		len -= 1;
+	printf("%d\n", len);
 	if (len != game->width)
 		handle_game_error(5);
 	while (line[i] && line[i] != '\n')
 	{
 		if ((i == 0 || i == len - i) && line[i] != '1')
 			handle_game_error(1);
-		if (check_wall == 1 && line[i] != '1')
+		if (check_wall && line[i] != '1')
 			handle_game_error(1);
 		if (line[i] != '1' && line[i] != '0' && line[i] != 'P' && line[i] != 'C'
 			&& line[i] != 'E')
 			handle_game_error(0);
+		if (is_last_line && line[i] != '1')
+			handle_game_error(1);
+		set_map_elements(game, line[i]);
 		i++;
 	}
-	set_map(game, line[i]);
+}
+
+void	check_map_elements(t_game *game)
+{
+	if (game->map_elements.player == 0)
+		handle_game_error(6);
+	if (game->map_elements.exit == 0)
+		handle_game_error(6);
+	if (game->map_elements.player == 0)
+		handle_game_error(6);
 }
 
 void	read_map(t_game *game, int fd)
 {
-	char *line;
-	int height = 0;
-	game = malloc(sizeof(t_game));
-	while (true)
+	char	*line;
+	int		height;
+	int		is_last_line;
+	char	*next_line;
+
+	height = 0;
+	game = (t_game *)malloc(sizeof(t_game));
+	line = get_next_line(fd);
+	while (line && *line)
 	{
-		line = get_next_line(fd);
-		if (!line || !*line)
-			break ;
+		next_line = get_next_line(fd);
+		is_last_line = (next_line == NULL || *next_line == '\0');
 		if (!height)
 		{
 			game->width = ft_strlen(line) - 1;
-			check_map(game, line, 1);
+			check_map_line(game, line, 1, is_last_line);
 		}
 		else
-			check_map(game, line, 0);
+			check_map_line(game, line, 0, is_last_line);
 		height += 1;
 		free(line);
+		line = next_line;
 	}
 	game->height = height;
+	check_map_elements(game);
 }

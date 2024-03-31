@@ -1,7 +1,7 @@
 NAME = so_long
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 RM = rm -fr
 MKDIR = mkdir -p
 MLX = -lmlx -framework OpenGL -framework AppKit

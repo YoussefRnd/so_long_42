@@ -6,7 +6,7 @@
 /*   By: yboumlak <yboumlak@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 02:26:12 by yboumlak          #+#    #+#             */
-/*   Updated: 2024/03/29 21:21:12 by yboumlak         ###   ########.fr       */
+/*   Updated: 2024/03/31 04:36:36 by yboumlak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,17 @@
 
 int	main(int argc, char **argv)
 {
-	// int		*mlx_ptr;
-	// int		*win_ptr;
 	int		fd;
 	t_game	*game;
 
+	// int		*mlx_ptr;
+	// int		*win_ptr;
 	game = NULL;
 	if (argc > 2)
 		return (0);
 	fd = open(argv[1], O_RDONLY);
 	read_map(game, fd);
+	check_map_accessiblility(game);
 	// mlx_ptr = mlx_init();
 	// if (!mlx_ptr)
 	// 	return (0);

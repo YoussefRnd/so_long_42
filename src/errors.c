@@ -6,7 +6,7 @@
 /*   By: yboumlak <yboumlak@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 22:12:25 by yboumlak          #+#    #+#             */
-/*   Updated: 2024/03/28 23:01:16 by yboumlak         ###   ########.fr       */
+/*   Updated: 2024/03/31 02:39:44 by yboumlak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,7 @@ void	handle_game_error(int type)
 		ft_putstr_fd("The map must have at least one collectible\n", 2);
 	else if (type == 5)
 		ft_putstr_fd("The map should be a rectangle\n", 2);
+	else if (type == 6)
+		ft_putstr_fd("The map must have at least one player, collectible and one exit\n", 2);
 	exit(1);
 }
