@@ -6,7 +6,7 @@
 /*   By: yboumlak <yboumlak@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 02:26:51 by yboumlak          #+#    #+#             */
-/*   Updated: 2024/03/31 21:48:11 by yboumlak         ###   ########.fr       */
+/*   Updated: 2024/04/02 01:21:21 by yboumlak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 # include "../lib/Libft/libft.h"
 # include "get_next_line.h"
-// # include <mlx.h>
+# include <mlx.h>
 # include <stdbool.h>
+
+# define PIXEL 64
 typedef struct s_map
 {
 	int			wall;
@@ -31,6 +33,13 @@ typedef struct s_player
 	int			y;
 }				t_player;
 
+typedef struct s_img
+{
+	int			*img;
+	int			width;
+	int			height;
+}				t_img;
+
 typedef struct s_game
 {
 	void		*mlx_ptr;
@@ -40,6 +49,7 @@ typedef struct s_game
 	char		**map;
 	t_map		map_elements;
 	t_player	player;
+	t_img		img;
 }				t_game;
 
 void			handle_game_error(int type);
@@ -48,5 +58,6 @@ void			check_map_accessibility(t_game *game);
 void			init_elements(t_game *game);
 void			init_map(t_game *game, int fd);
 void			init_mlx(t_game *game);
+void			draw_pixels(t_game *game, char *line, int height);
 
 #endif

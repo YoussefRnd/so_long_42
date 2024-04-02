@@ -6,7 +6,7 @@
 /*   By: yboumlak <yboumlak@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 03:01:46 by yboumlak          #+#    #+#             */
-/*   Updated: 2024/03/31 21:37:49 by yboumlak         ###   ########.fr       */
+/*   Updated: 2024/04/02 03:29:24 by yboumlak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,5 @@ void	read_map(t_game *game, int fd)
 	}
 	game->height = height;
 	check_map_elements(game);
+	free(next_line);
 }

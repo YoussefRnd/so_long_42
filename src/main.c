@@ -6,7 +6,7 @@
 /*   By: yboumlak <yboumlak@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 02:26:12 by yboumlak          #+#    #+#             */
-/*   Updated: 2024/03/31 21:48:04 by yboumlak         ###   ########.fr       */
+/*   Updated: 2024/04/01 18:00:38 by yboumlak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int	main(int argc, char **argv)
 	init_map(&game, fd);
 	close(fd);
 	check_map_accessibility(&game);
-	// mlx_loop(win_ptr);
+	mlx_loop(game.mlx_ptr);
 	return (0);
 }

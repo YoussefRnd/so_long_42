@@ -6,7 +6,7 @@
 /*   By: yboumlak <yboumlak@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 02:29:38 by yboumlak          #+#    #+#             */
-/*   Updated: 2024/03/31 21:48:21 by yboumlak         ###   ########.fr       */
+/*   Updated: 2024/04/01 04:50:04 by yboumlak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	check_map_accessibility(t_game *game)
 	reached.reached_exit = 0;
 	flood_fill(game, game->player.x, game->player.y, &reached);
 	if (!reached.reached_exit)
-		handle_game_error(7);
+		handle_game_error(6);
 	if (reached.reached_collectible != game->map_elements.collectible)
-		handle_game_error(7);
+		handle_game_error(6);
 }
